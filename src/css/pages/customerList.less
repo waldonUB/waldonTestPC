@@ -1,0 +1,106 @@
+.panel-body {
+  .base-tabs {
+    display: flex;
+    flex-flow: row nowrap;
+    box-sizing: border-box;
+    position: relative;
+    color: #333;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    &:after {
+      width: 102%;
+      height: 1px;
+      content: "";
+      background: #eee;
+      position: absolute;
+      top: 43px;
+      left: -1%;
+    }
+    .tab-pane {
+      width: 60px;
+      height: 26px;
+      line-height: 26px;
+      margin-right: 60px;
+      padding-bottom: 17px;
+      font-size: 16px;
+      font-weight: 400;
+      cursor: pointer;
+      &.tabs-slider {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 48px;
+        height: 3px;
+        background: rgba(0, 187, 114, 1);
+        padding-bottom: 0;
+      }
+      &.isActive {
+        color: #00BB72;
+      }
+    }
+  }
+  .tag-tabs {
+    display: flex;
+    flex-flow: row nowrap;
+    box-sizing: border-box;
+    position: relative;
+    color: #333;
+    list-style: none;
+    margin: 0;
+    padding: 34px 0 28px 0;
+    .tab-pane {
+      max-width: 70px;
+      height: 26px;
+      margin-right: 25px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 14px;
+      padding: 0 2px;
+      font-weight: 400;
+      line-height: 26px;
+      cursor: pointer;
+      &.tabs-slider {
+        position: absolute;
+        left: 0;
+        width: 48px;
+        height: 3px;
+        background: rgba(0, 187, 114, 1);
+        bottom: 28px;
+      }
+      &.isActive {
+        color: #00BB72;
+      }
+    }
+  }
+  .select-box {
+    display: flex;
+    flex-flow: row nowrap;
+    height: 34px;
+    margin-bottom: 20px;
+    input {
+      border-radius: 5px;
+      margin-right: 10px;
+      outline: 0;
+      padding: 0 10px;
+      border: 1px solid rgba(238, 238, 238, 1);
+      font: 400 13.3333px Arial;
+      &:hover {
+        border: 1px solid #00BB72;
+      }
+      &:focus {
+        border: 1px solid #00BB72;
+      }
+      &::placeholder {
+        color: rgba(196, 196, 204, 1);
+      }
+      &.small-input {
+        width: 120px;
+      }
+      &.middle-input {
+        width: 150px;
+      }
+    }
+  }
+}

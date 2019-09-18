@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>入职测试PC版HTML</title>
+  <link rel="stylesheet" href="./src/css/normalize.css">
+  <link rel="stylesheet/less" type="text/css" href="./src/css/layout.less">
+  <link rel="stylesheet/less" type="text/css" href="./src/css/common.less">
+  <link rel="stylesheet/less" type="text/css" href="./src/css/pages/customerList.less">
+  <link rel="stylesheet/less" type="text/css" href="./src/css/pages/tagManage.less">
+  <script src="./src/js/less.js"></script>
+  <script src="./src/js/vue.js"></script>
+  <script src="./src/js/vue-router.js"></script>
+  <script src="./src/components/content/TempContentBox.js"></script>
+  <script src="./src/components/common/TempCommon.js"></script>
+  <script src="./src/pages/TempCustomerList.js"></script>
+  <script src="./src/pages/TempTagManage.js"></script>
+  <script src="./src/router/index.js"></script>
+  <script src="./src/css/iconfont/iconfont.js"></script>
+</head>
+<body>
+<div id="app">
+  <div class="yx-wrapper">
+    <div class="yx-header"></div>
+    <temp-content-box></temp-content-box>
+  </div>
+</div>
+<script>
+  new Vue({
+    router,
+    components: {TempContentBox}
+  }).$mount('#app')
+</script>
+</body>
+</html>
