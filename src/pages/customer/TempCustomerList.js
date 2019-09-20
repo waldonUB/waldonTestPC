@@ -1,4 +1,4 @@
-const TempCustomerList = {
+routerComponents.TempCustomerList = {
   template: `
   <div class="list-wrapper">
     <section v-show="!isEdit">
@@ -85,7 +85,7 @@ const TempCustomerList = {
       <temp-customer-edit ref="customerEdit" :is-edit.sync="isEdit" @editSuccess="getTsClientList"></temp-customer-edit>
     </section>
   </div>`,
-  components: {ContentHeader, BtnSuccess, BtnNormal, BtnTable, ContentPanel, YxTable, YxPagination, YxSelect, TempCustomerEdit},
+  components: {TempCustomerEdit: routerComponents.TempCustomerEdit},
   data () {
     return {
       // 搜索条件区域

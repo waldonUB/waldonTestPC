@@ -83,7 +83,7 @@
   cursor: pointer;
   position: relative;
 }
-// 按钮大小
+// 组件按钮大小
 .btn-mini {
   min-width: 50px;
   height: 26px;
@@ -303,33 +303,17 @@
   }
 }
 
-// iconfont的图标样式
-.icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  overflow: hidden;
-  fill: currentColor;
-}
-.icon-only {
-  width: 0.75em;
-  height: 0.75em;
-  vertical-align: -0.15em;
-  overflow: hidden;
-  fill: rgb(229, 229, 229);
-}
-.inner-font {
-  font-style: normal;
-  text-decoration: underline;
-  display: inline-block;
-  vertical-align: middle;
-  padding-right: 11px;
-  cursor: pointer;
-  height: 21px;
-  line-height: 20px;
-  color: #535353;
-  font-size: 14px;
-  font-weight: 400;
-  border-right: 1px solid rgb(207, 207, 207);
-  margin-right: 10px;
+// tooltip样式
+.tooltip-box {
+  width: 320px;
+  height: 189px;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(255,255,255,1);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 4px;
+  z-index: 999;
+  border-bottom: 1px solid rgba(238,238,238,1);
 }

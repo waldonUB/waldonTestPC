@@ -1,4 +1,4 @@
-const TempTagManage = {
+routerComponents.TempTagManage = {
   template: `
   <div class="list-wrapper">
     <content-header>
@@ -9,7 +9,7 @@ const TempTagManage = {
     <content-panel>
       <section class="panel-body">
         <div class="btn-group">
-          <btn-success @click.native="addTsClientLabel">
+          <btn-success v-tooltip @click.native="addTsClientLabel">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-icon-11"></use>
             </svg>
@@ -22,8 +22,8 @@ const TempTagManage = {
             <td>{{item.id}}</td>
             <td>{{item.name}}</td>
             <td>
-              <btn-normal class="btn-normal-rt">重命名</btn-normal>
-              <btn-normal>删除</btn-normal>
+              <btn-normal v-tooltip class="btn-normal-rt">重命名</btn-normal>
+              <btn-normal @click.native="delTsClientLabel(item.id)">删除</btn-normal>
             </td>
           </tr>
         </yx-table>
@@ -32,7 +32,6 @@ const TempTagManage = {
     </content-panel>
     <yx-alert type="error" :is-show.sync="isShow">{{showMsg}}</yx-alert>
   </div>`,
-  components: {ContentHeader, BtnSuccess, BtnNormal, ContentPanel, YxTable, YxPagination, YxSelect, YxAlert},
   data () {
     return {
       // 分页信息
@@ -83,12 +82,26 @@ const TempTagManage = {
     async addTsClientLabel () {
       let params = {
         sid: -1,
-        name: '测试哈哈哈'
+        name: '未联系'
       }
       const res = await this.$yxPost('/client/tsClientLabel_h.jsp?cmd=addTsClientLabel', params)
       if (res.data && res.data.success) {
-        this.tableList = res.data.data
-        this.pageParams.total = res.data.total
+        this.getTsClientLabelList()
+      } else {
+        this.isShow = true
+        this.showMsg = res.data.msg
+      }
+    },
+    /**
+     * 删除标签
+     * */
+    async delTsClientLabel (id) {
+      let params = {
+        id
+      }
+      const res = await this.$yxPost('/client/tsClientLabel_h.jsp?cmd=delTsClientLabel', params)
+      if (res.data && res.data.success) {
+        this.getTsClientLabelList()
       } else {
         this.isShow = true
         this.showMsg = res.data.msg

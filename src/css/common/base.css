@@ -1,0 +1,32 @@
+/* 基础和全局的样式 */
+
+/* iconfont的图标样式 */
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  overflow: hidden;
+  fill: currentColor;
+}
+.icon-only {
+  width: 0.75em;
+  height: 0.75em;
+  vertical-align: -0.15em;
+  overflow: hidden;
+  fill: rgb(229, 229, 229);
+}
+.inner-font {
+  font-style: normal;
+  text-decoration: underline;
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 11px;
+  cursor: pointer;
+  height: 21px;
+  line-height: 20px;
+  color: #535353;
+  font-size: 14px;
+  font-weight: 400;
+  border-right: 1px solid rgb(207, 207, 207);
+  margin-right: 10px;
+}

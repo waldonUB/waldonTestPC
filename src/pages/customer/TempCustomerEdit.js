@@ -1,4 +1,4 @@
-const TempCustomerEdit = {
+routerComponents.TempCustomerEdit = {
   template: `
   <div class="edit-box">
     <content-header>
@@ -151,7 +151,7 @@ const TempCustomerEdit = {
       </div>
     </section>
     <section class="edit-bottom">
-      <btn-success v-if="!editForm.id" @click.native="addTsClient" size="large">添加</btn-success>
+      <btn-success v-if="!editForm.cid" @click.native="addTsClient" size="large">添加</btn-success>
       <div class="btn-group" v-else>
         <btn-success @click.native="setTsClient" size="large">保存</btn-success>
         <btn-default class="edit-trash" @click.native="delTsClient" size="large">
@@ -164,12 +164,11 @@ const TempCustomerEdit = {
     </section>
     <yx-alert type="error" :is-show.sync="isShow">{{showMsg}}</yx-alert>
   </div>`,
-  components: {ContentHeader, BtnSuccess, BtnNormal, BtnDefault, ContentPanel, YxTable, YxPagination, YxSelect, YxAlert},
   props: ['isEdit'],
   data () {
     return {
       editForm: {
-        id: '',
+        cid: '',
         contacts: '', // 联系人名称
         mobile: '',
         qq: '',
@@ -186,7 +185,7 @@ const TempCustomerEdit = {
       sourceList: [], // 客户来源列表
       selectedLabel: '',
       isShow: false,
-      showMsg: ''
+      showMsg: '',
     }
   },
   methods: {
@@ -195,7 +194,7 @@ const TempCustomerEdit = {
      * */
     goBackList () {
       this.editForm = {
-        id: '',
+        cid: '',
         contacts: '', // 联系人名称
         mobile: '',
         qq: '',
@@ -222,7 +221,7 @@ const TempCustomerEdit = {
       if (res.data && res.data.success) {
         const row = res.data.data
         this.editForm = {
-          id: row.id,
+          cid: row.id,
           contacts: row.contacts,
           mobile: row.mobile,
           qq: row.qq,
@@ -276,10 +275,9 @@ const TempCustomerEdit = {
      */
     async delTsClient () {
       const params = {
-        cid: this.editForm.id
+        cid: this.editForm.cid
       }
       const res = await this.$yxPost('/client/tsClient_h.jsp?cmd=delTsClient', params)
-      debugger
       if (res.data && res.data.success) {
         this.goBackList()
         this.$emit('editSuccess') // 创建成功的回调

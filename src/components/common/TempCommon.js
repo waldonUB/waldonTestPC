@@ -1,5 +1,9 @@
+/**
+ * 将通用的组件改为全局注册的形式
+ */
+
 // 弹窗组件
-const YxAlert = {
+Vue.component('YxAlert', {
   template: `
   <div v-show="isShow" class="alert-error">
     <svg class="icon" aria-hidden="true">
@@ -45,10 +49,10 @@ const YxAlert = {
       }
     }
   }
-}
+})
 
 // 按钮组件
-const BtnDefault = {
+Vue.component('BtnDefault', {
   template: `
   <div class="btn-default" :class="btnSize">
     <slot></slot>
@@ -72,14 +76,15 @@ const BtnDefault = {
       }
     }
   }
-}
-const BtnNormal = {
+})
+Vue.component('BtnNormal', {
   template: `
   <div class="btn-normal">
     <slot></slot>
   </div>`
-}
-const BtnSuccess = {
+})
+
+Vue.component('BtnSuccess', {
   template: `
   <div class="btn-success" :class="btnSize">
     <slot></slot>
@@ -103,16 +108,17 @@ const BtnSuccess = {
       }
     }
   }
-}
-const BtnTable = {
+})
+
+Vue.component('BtnTable', {
   template: `
   <div class="btn-table">
     <slot></slot>
   </div>`
-}
+})
 
 // 内容头部组件
-const ContentHeader = {
+Vue.component('ContentHeader', {
   template: `
   <div class="content-header">
     <div class="header-left">
@@ -122,18 +128,16 @@ const ContentHeader = {
       <slot name="headerRight"></slot>
     </div>
   </div>`
-}
-
+})
 // 内容body
-const ContentPanel = {
+Vue.component('ContentPanel', {
   template: `
   <div class="panel-wrapper">
     <slot></slot>
   </div>`
-}
-
+})
 // 下拉框组件
-const YxSelect = {
+Vue.component('YxSelect', {
   template: `
   <div class="select-input" :style="{width: selectWidth, height: selectHeight, lineHeight: selectHeight}">
     <input readonly type="text">
@@ -182,10 +186,9 @@ const YxSelect = {
       vm.isShowOptions = false
     })
   }
-}
-
+})
 // 分页组件
-const YxPagination = {
+Vue.component('YxPagination', {
   template: `
   <div class="pagination-wrapper">
     <div class="left-part">
@@ -219,7 +222,7 @@ const YxPagination = {
       </btn-default>
     </div>
   </div>`,
-  components: {BtnDefault, YxSelect},
+  // components: {BtnDefault, YxSelect},
   props: {
     pageParams: {
       type: Object,
@@ -264,10 +267,9 @@ const YxPagination = {
   created () {
     this.selectedLabel = 20
   }
-}
-
+})
 // 表格组件
-const YxTable = {
+Vue.component('YxTable', {
   template: `
   <div class="table-wrapper">
     <table>
@@ -297,4 +299,36 @@ const YxTable = {
       default: () => []
     }
   }
-}
+})
+
+// tooltip组件
+Vue.component('YxTooltip', {
+  template: `
+  <div id="tooltip" class="tooltip-box">
+    <div class="tooltip-header">
+      <slot name="tHeader"></slot>
+    </div>
+    <div class="tooltip-body">
+      <slot name="tBody"></slot>
+    </div>
+    <div class="tooltip-footer">
+      <slot name="tFooter"></slot>
+    </div>
+  </div>`,
+  data () {
+    return {
+      isShow: false
+    }
+  },
+  methods: {
+    toggle () {
+      this.isShow = !this.isShow
+    }
+  },
+  mounted () {
+    const tooltip = document.getElementById('tooltip')
+    document.body.addEventListener('mouseup', function () {
+      tooltip.style.display = 'none'
+    })
+  }
+})
