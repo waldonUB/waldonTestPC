@@ -13,8 +13,9 @@
   <script src="./src/js/vue-router.js"></script>
   <script src="./src/components/content/TempContentBox.js"></script>
   <script src="./src/components/common/TempCommon.js"></script>
-  <script src="./src/pages/TempCustomerList.js"></script>
-  <script src="./src/pages/TempTagManage.js"></script>
+  <script src="./src/pages/customer/TempCustomerEdit.js"></script>
+  <script src="./src/pages/customer/TempCustomerList.js"></script>
+  <script src="./src/pages/tagManage/TempTagManage.js"></script>
   <script src="./src/router/index.js"></script>
   <script src="./src/css/iconfont/iconfont.js"></script>
 </head>
@@ -25,7 +26,20 @@
     <temp-content-box></temp-content-box>
   </div>
 </div>
+<script src="./src/js/axios.js"></script>
 <script>
+  axios.defaults.baseURL = 'http://st.ppp.top/ajax' // 目前只有开发环境，先不配置
+  const yxPost = function (url, params) {
+    return axios({
+      method: 'post',
+      url: url,
+      params: params,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      }
+    })
+  }
+  Vue.prototype.$yxPost = yxPost
   new Vue({
     router,
     components: {TempContentBox}

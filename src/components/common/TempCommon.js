@@ -50,9 +50,28 @@ const YxAlert = {
 // 按钮组件
 const BtnDefault = {
   template: `
-  <div class="btn-default">
+  <div class="btn-default" :class="btnSize">
     <slot></slot>
-  </div>`
+  </div>`,
+  props: {
+    size: {
+      type: String
+    }
+  },
+  computed: {
+    btnSize () {
+      switch (this.size) {
+        case 'mini':
+          return 'btn-mini'
+        case 'small':
+          return 'btn-small'
+        case 'medium':
+          return 'btn-medium'
+        case 'large':
+          return 'btn-large'
+      }
+    }
+  }
 }
 const BtnNormal = {
   template: `
@@ -62,7 +81,32 @@ const BtnNormal = {
 }
 const BtnSuccess = {
   template: `
-  <div class="btn-success">
+  <div class="btn-success" :class="btnSize">
+    <slot></slot>
+  </div>`,
+  props: {
+    size: {
+      default: 'medium'
+    }
+  },
+  computed: {
+    btnSize () {
+      switch (this.size) {
+        case 'mini':
+          return 'btn-mini'
+        case 'small':
+          return 'btn-small'
+        case 'medium':
+          return 'btn-medium'
+        case 'large':
+          return 'btn-large'
+      }
+    }
+  }
+}
+const BtnTable = {
+  template: `
+  <div class="btn-table">
     <slot></slot>
   </div>`
 }
@@ -91,28 +135,38 @@ const ContentPanel = {
 // 下拉框组件
 const YxSelect = {
   template: `
-  <div class="select-input" :style="{width: selectWidth}">
-    <input readonly type="text"
-           class="select-option"
-           v-model="current"
-           @click="showOptions"
-           @blur="closeOptions">
-    <svg class="icon-select" aria-hidden="true">
+  <div class="select-input" :style="{width: selectWidth, height: selectHeight, lineHeight: selectHeight}">
+    <input readonly type="text">
+    <svg @click="showOptions" class="icon-select" aria-hidden="true">
       <use xlink:href="#icon-icon-8"></use>
     </svg>
-    <ul class="select-options" v-show="isShowOptions">
-      <li v-for="item of options"
-          :key="item.code"
-          @mousedown="selectOption(item)">
-        {{item.label}}
-      </li>
+    <div class="show-label"
+      @click="showOptions">
+        {{selectedLabel || '请选择'}}
+    </div>
+    <ul class="select-options"
+      v-show="isShowOptions">
+      <slot></slot>
     </ul>
   </div>`,
-  props: ['current', 'options', 'selectWidth'],
+  // props: ['selectedValue', 'selectedLabel', 'selectWidth'],
+  props: {
+    selectedLabel: {
+      default: ''
+    },
+    selectWidth: {
+      
+    },
+    selectHeight: {
+      default: '34px'
+    }
+  },
   data () {
     return {
       isShowOptions: false // 是否显示下拉选项
     }
+  },
+  computed: {
   },
   methods: {
     showOptions () {
@@ -120,11 +174,13 @@ const YxSelect = {
     },
     closeOptions () {
       this.isShowOptions = false
-    },
-    selectOption (item) {
-      this.showOptions()
-      this.$emit('update:current', item.label)
     }
+  },
+  mounted () {
+    const vm = this
+    document.body.addEventListener('mouseup', function () {
+      vm.isShowOptions = false
+    })
   }
 }
 
@@ -134,9 +190,15 @@ const YxPagination = {
   <div class="pagination-wrapper">
     <div class="left-part">
       <span>共有{{pageParams.total}}条记录，每页显示</span>
-      <yx-select :current.sync="pageParams.limit"
-                 :options="pageSize"
-                 select-width="70px">
+      <yx-select 
+        :selectedLabel="selectedLabel"
+        select-width="70px"
+        ref="pageSelect">
+        <li v-for="item of pageSize"
+          :key="item"
+          @mousedown="changePageSelect(item)">
+          {{item}}
+        </li>
       </yx-select>
     </div>
     <div class="right-part">
@@ -174,20 +236,8 @@ const YxPagination = {
   data () {
     return {
       pageIndex: 1,
-      pageSize: [
-        {
-          code: '01',
-          label: '10'
-        },
-        {
-          code: '02',
-          label: '20'
-        },
-        {
-          code: '03',
-          label: '50'
-        }
-      ]
+      pageSize: [10, 20, 50],
+      selectedLabel: ''
     }
   },
   computed: {
@@ -205,7 +255,14 @@ const YxPagination = {
   methods: {
     gotoIndex () {
       this.pageParams.pageNow = this.pageIndex
+    },
+    changePageSelect (item) {
+      this.selectedLabel = item
+      this.$refs.pageSelect.closeOptions()
     }
+  },
+  created () {
+    this.selectedLabel = 20
   }
 }
 

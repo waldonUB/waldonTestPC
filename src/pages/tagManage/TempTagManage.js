@@ -1,6 +1,6 @@
 const TempTagManage = {
   template: `
-  <div>
+  <div class="list-wrapper">
     <content-header>
       <template #headerLeft>
         <span>标签管理</span>
@@ -75,7 +75,6 @@ const TempTagManage = {
       if (res.data && res.data.success) {
         this.tableList = res.data.data
         this.pageParams.total = res.data.total
-      } else {
       }
     },
     /**
@@ -97,6 +96,6 @@ const TempTagManage = {
     }
   },
   created () {
-    // this.getTsClientLabelList()
+    this.getTsClientLabelList()
   }
 }

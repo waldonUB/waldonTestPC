@@ -13,7 +13,7 @@ const TempContentBox = {
     </div>
     <div class="content-main">
       <router-view></router-view>
-  </div>
+    </div>
   </div>`,
   data () {
     return {

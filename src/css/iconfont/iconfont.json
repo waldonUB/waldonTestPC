@@ -90,6 +90,13 @@
       "unicode_decimal": 59840
     },
     {
+      "icon_id": "7765196",
+      "name": "返回",
+      "font_class": "icon-2",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
       "icon_id": "7765202",
       "name": "icon-14",
       "font_class": "icon-8",
@@ -102,6 +109,13 @@
       "font_class": "icon-9",
       "unicode": "e611",
       "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "7765205",
+      "name": "btnIcon_3",
+      "font_class": "icon-10",
+      "unicode": "e612",
+      "unicode_decimal": 58898
     },
     {
       "icon_id": "7765206",

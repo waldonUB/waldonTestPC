@@ -1,105 +1,279 @@
-.panel-body {
-  .base-tabs {
-    display: flex;
-    flex-flow: row nowrap;
-    box-sizing: border-box;
+.list-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 20px 32px 20px 20px;
+  min-width: 1010px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  position: relative;
+  .panel-body {
+    .base-tabs {
+      display: flex;
+      flex-flow: row nowrap;
+      box-sizing: border-box;
+      position: relative;
+      color: #333;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      &:after {
+        width: 102%;
+        height: 1px;
+        content: "";
+        background: #eee;
+        position: absolute;
+        top: 43px;
+        left: -1%;
+      }
+      .tab-pane {
+        width: 60px;
+        height: 26px;
+        line-height: 26px;
+        margin-right: 60px;
+        padding-bottom: 17px;
+        font-size: 16px;
+        font-weight: 400;
+        cursor: pointer;
+        &.tabs-slider {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 48px;
+          height: 3px;
+          background: rgba(0, 187, 114, 1);
+          padding-bottom: 0;
+        }
+        &.isActive {
+          color: #00BB72;
+        }
+      }
+    }
+    .tag-tabs {
+      display: flex;
+      flex-flow: row nowrap;
+      box-sizing: border-box;
+      position: relative;
+      color: #333;
+      list-style: none;
+      margin: 0;
+      padding: 34px 0 28px 0;
+      .tab-pane {
+        max-width: 70px;
+        height: 26px;
+        margin-right: 25px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 14px;
+        padding: 0 2px;
+        font-weight: 400;
+        line-height: 26px;
+        cursor: pointer;
+        &.tabs-slider {
+          position: absolute;
+          left: 0;
+          width: 48px;
+          height: 3px;
+          background: rgba(0, 187, 114, 1);
+          bottom: 28px;
+        }
+        &.isActive {
+          color: #00BB72;
+        }
+      }
+    }
+    .select-box {
+      display: flex;
+      flex-flow: row nowrap;
+      height: 34px;
+      margin-bottom: 20px;
+      input {
+        border-radius: 5px;
+        margin-right: 10px;
+        outline: 0;
+        padding: 0 10px;
+        border: 1px solid rgba(238, 238, 238, 1);
+        font: 400 13.3333px Arial;
+        &:hover {
+          border: 1px solid #00BB72;
+        }
+        &:focus {
+          border: 1px solid #00BB72;
+        }
+        &::placeholder {
+          color: rgba(196, 196, 204, 1);
+        }
+        &.small-input {
+          width: 120px;
+        }
+        &.middle-input {
+          width: 150px;
+        }
+      }
+    }
+  }
+
+  // 编辑页面
+  .edit-box {
+    height: 100%;
+    width: 100%;
     position: relative;
-    color: #333;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    &:after {
-      width: 102%;
-      height: 1px;
-      content: "";
-      background: #eee;
+    .edit-body {
       position: absolute;
-      top: 43px;
-      left: -1%;
+      left: 0;
+      right: 0;
+      top: 56px;
+      bottom: 0;
+      box-sizing: border-box;
+      margin-bottom: 100px;
+      background: rgba(255,255,255,1);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      overflow: auto;
+      &>div {
+        position: relative;
+        padding: 40px 170px;
+      }
+      @media (max-width: 1360px) {
+        &>div {
+          padding: 40px 10px;
+        }
+      }
+      .base-info {
+        border-bottom: 1px solid #EEEEEE;
+      }
+      .detail-info {
+        border-bottom: 1px solid #EEEEEE;
+      }
+      .sale-info {
+        border-bottom: 1px solid #EEEEEE;
+      }
     }
-    .tab-pane {
-      width: 60px;
-      height: 26px;
-      line-height: 26px;
-      margin-right: 60px;
-      padding-bottom: 17px;
-      font-size: 16px;
-      font-weight: 400;
-      cursor: pointer;
-      &.tabs-slider {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 48px;
-        height: 3px;
-        background: rgba(0, 187, 114, 1);
-        padding-bottom: 0;
-      }
-      &.isActive {
-        color: #00BB72;
-      }
-    }
-  }
-  .tag-tabs {
-    display: flex;
-    flex-flow: row nowrap;
-    box-sizing: border-box;
-    position: relative;
-    color: #333;
-    list-style: none;
-    margin: 0;
-    padding: 34px 0 28px 0;
-    .tab-pane {
-      max-width: 70px;
-      height: 26px;
-      margin-right: 25px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: 14px;
-      padding: 0 2px;
-      font-weight: 400;
-      line-height: 26px;
-      cursor: pointer;
-      &.tabs-slider {
-        position: absolute;
-        left: 0;
-        width: 48px;
-        height: 3px;
-        background: rgba(0, 187, 114, 1);
-        bottom: 28px;
-      }
-      &.isActive {
-        color: #00BB72;
+    .edit-bottom {
+      height: 100px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      border-top: 1px solid rgba(238,238,238,1);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+      background: rgba(255,255,255,1);
+      z-index: 100;
+      box-sizing: border-box;
+      padding-top: 30px;
+      display: flex;
+      justify-content: center;
+      .btn-group {
+        display: flex;
+        .edit-trash {
+          width: 82px;
+          margin-left: 10px; 
+          color: #535353;
+          .icon {
+            margin-right: 6px;
+          }
+        }
       }
     }
   }
-  .select-box {
-    display: flex;
-    flex-flow: row nowrap;
-    height: 34px;
-    margin-bottom: 20px;
-    input {
-      border-radius: 5px;
-      margin-right: 10px;
-      outline: 0;
-      padding: 0 10px;
-      border: 1px solid rgba(238, 238, 238, 1);
-      font: 400 13.3333px Arial;
-      &:hover {
-        border: 1px solid #00BB72;
+}
+
+.info-title {
+  width: 153px;
+  position: absolute;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+.info-form {
+  margin-left: 210px;
+  .info-row {
+    width: 770px;
+    height: 66px;
+    &.row-after {
+      margin-top: 30px;
+    }
+    &.row-area {
+      height: 122px;
+    }
+    .info-item {
+      float: left;
+      width: 350px;
+      margin-right: 69px;
+      &.info-item-last {
+        margin-right: 0;
       }
-      &:focus {
-        border: 1px solid #00BB72;
+      &.info-item-area {
+        width: 100%;
+        margin-right: 0;
       }
-      &::placeholder {
-        color: rgba(196, 196, 204, 1);
+      .item-label {
+        box-sizing: border-box;
+        width: 350px;
+        padding-bottom: 6px;
+        line-height: 20px;
+        font-size: 14px;
+        font-weight: 400;
+        color: rgba(83,83,83,1);
+        .label-must {
+          color: rgb(255, 89, 89);
+          font-size: 14px;
+          font-weight: bolder;
+          margin-right: 2px;
+        }
       }
-      &.small-input {
-        width: 120px;
-      }
-      &.middle-input {
-        width: 150px;
+      .input-group {
+        width: 100%;
+        input {
+          box-sizing: border-box;
+          border-radius: 5px;
+          margin-right: 10px;
+          outline: 0;
+          padding: 0 10px;
+          border: 1px solid rgba(238, 238, 238, 1);
+          font: 400 13.3333px Arial;
+          &:hover {
+            border: 1px solid #00BB72;
+          }
+          &:focus {
+            border: 1px solid #00BB72;
+          }
+          &::placeholder {
+            color: rgba(196, 196, 204, 1);
+          }
+          &.form-input {
+            width: 100%;
+            height: 40px;
+          }
+        }
+        .form-textarea {
+          width: 100%;
+          min-height: 96px;
+          display: block;
+          resize: vertical;
+          line-height: 1.5;
+          box-sizing: border-box;
+          font-size: inherit;
+          color: rgb(96, 98, 102);
+          background-color: rgb(255, 255, 255);
+          padding: 5px 15px;
+          border-width: 1px;
+          border-style: solid;
+          border-color: rgb(220, 223, 230);
+          border-radius: 4px;
+          outline: 0;
+          &:hover {
+            border: 1px solid #00BB72;
+          }
+          &:focus {
+            border: 1px solid #00BB72;
+          }
+          &::placeholder {
+            color: rgba(196, 196, 204, 1);
+            font-size: 14px;
+            font-weight: 400;
+          }
+        }
       }
     }
   }
