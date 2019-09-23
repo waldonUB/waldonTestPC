@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>入职测试PC版HTML</title>
+  <link rel="stylesheet" href="../src/css/res/normalize.css">
+  <link rel="stylesheet/less" type="text/css" href="./btn/btn.less">
+  <script src="../src/js/less.js"></script>
+  <script src="../src/js/vue.js"></script>
+  <script src="./btn/BtnTest.js"></script>
+  <script src="../src/css/res/iconfont/iconfont.js"></script>
+  <style>
+    .icon {
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
+    }
+    .btn-group {
+      width: 800px;
+      height: 600px;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    .yx-success {
+      width: 200px;
+      height: 80px;
+    }
+    .icon-only {}
+  </style>
+</head>
+<body>
+<div id="app">
+  <div class="btn-group">
+    <yx-btn>我是普通按钮</yx-btn>
+    <yx-btn type="success" class="yx-success">我是成功按钮</yx-btn>
+    <yx-btn type="text">我是文字按钮</yx-btn>
+    <yx-btn type="success">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-icon-11"></use>
+      </svg>
+      <span>我是带图标按钮</span>
+    </yx-btn>
+    <yx-btn type="success" class="icon-only">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-icon-11"></use>
+      </svg>
+    </yx-btn>
+  </div>
+</div>
+<script>
+  new Vue({
+  }).$mount('#app')
+</script>
+</body>
+</html>
