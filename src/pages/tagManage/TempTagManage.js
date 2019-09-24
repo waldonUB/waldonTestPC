@@ -9,21 +9,25 @@ routerComponents.TempTagManage = {
     <content-panel>
       <section class="panel-body">
         <div class="btn-group">
-          <btn-success v-tooltip @click.native="addTsClientLabel">
+          <yx-btn type="success" v-tooltip>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-icon-11"></use>
             </svg>
             <span>添加标签</span>
-          </btn-success>
+          </yx-btn>
         </div>
-        <yx-table :table-th-list="tableThList">
+        <yx-table :table-th-list="tableThList" :tableData="tableList">
           <tr v-for="item of tableList"
               :key="item.id">
             <td>{{item.id}}</td>
             <td>{{item.name}}</td>
             <td>
-              <btn-normal v-tooltip class="btn-normal-rt">重命名</btn-normal>
-              <btn-normal @click.native="delTsClientLabel(item.id)">删除</btn-normal>
+              <yx-btn v-tooltip type="text" class="btn-text-rt" @click.native="getTagRowInfo(item)">
+                <span>重命名</span>
+              </yx-btn>
+              <yx-btn @click.native="delTsClientLabel(item.id)" type="text">
+                <span>删除</span>
+              </yx-btn>
             </td>
           </tr>
         </yx-table>
@@ -37,7 +41,7 @@ routerComponents.TempTagManage = {
       // 分页信息
       pageParams: {
         total: 1, // 条数
-        pageNow: 1,
+        pageNow: 0,
         limit: 10
       },
       tableThList: [
@@ -79,12 +83,35 @@ routerComponents.TempTagManage = {
     /**
      * 添加标签
      * */
-    async addTsClientLabel () {
+    async addTsClientLabel (tagName) {
       let params = {
         sid: -1,
-        name: '未联系'
+        name: tagName
       }
       const res = await this.$yxPost('/client/tsClientLabel_h.jsp?cmd=addTsClientLabel', params)
+      if (res.data && res.data.success) {
+        this.getTsClientLabelList()
+      } else {
+        this.isShow = true
+        this.showMsg = res.data.msg
+      }
+    },
+    /**
+     * 获取当前行标签信息
+     */
+    getTagRowInfo (row) {
+      this.$bus.$emit('getTagRowInfo', row)
+    },
+    /**
+     * 修改标签
+     * eoLinker的setTsClientLabel接口提供的参数有问题，需要传id和name就行
+     */
+    async setTsClientLabel (id, name) {
+      let params = {
+        id,
+        name
+      }
+      const res = await this.$yxPost('/client/tsClientLabel_h.jsp?cmd=setTsClientLabel', params)
       if (res.data && res.data.success) {
         this.getTsClientLabelList()
       } else {
@@ -109,6 +136,14 @@ routerComponents.TempTagManage = {
     }
   },
   created () {
-    this.getTsClientLabelList()
+    const vm = this
+    vm.getTsClientLabelList()
+    vm.$bus.$on('setTipData', function (tipData) {
+      if (tipData.id) {
+        vm.setTsClientLabel(tipData.id, tipData.name)
+      } else {
+        vm.addTsClientLabel(tipData.name)
+      }
+    })
   }
 }

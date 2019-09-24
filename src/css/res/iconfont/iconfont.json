@@ -13,6 +13,13 @@
       "unicode_decimal": 59228
     },
     {
+      "icon_id": "1058093",
+      "name": "error",
+      "font_class": "error1",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
       "icon_id": "1190704",
       "name": "clock",
       "font_class": "clock",

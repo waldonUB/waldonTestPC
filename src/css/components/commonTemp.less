@@ -21,68 +21,55 @@
   }
 }
 
-// 按钮组件样式
-.btn-default {
-  min-width: 34px;
-  height: 34px;
+// 合并后的按钮组件样式
+.yx-btn {
   font-size: 14px;
   font-weight: 400;
-  display: inline-flex;
+  display: inline-block;
+  padding: 9px 16px;
   cursor: pointer;
   text-align: center;
   box-sizing: border-box;
   border-radius: 4px;
+  color: rgb(83, 83, 83);
   background: rgba(255,255,255,1);
   border: 1px solid rgba(218, 218, 218, 1);
-  justify-content: center;
-  align-items: center;
-  &:hover {
-    background-color: rgb(247, 247, 247);
-  }
+  outline: 0;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
-.btn-normal {
-  font-size: 14px;
-  font-weight: 400;
-  display: inline-block;
-  cursor: pointer;
-  text-align: center;
-  box-sizing: border-box;
-  color: #00bb72;
-  &:hover {
-    color: rgba(0, 160, 98, 1);
-  }
-}
-.btn-success {
-  padding: 0 16px;
-  font-size: 14px;
-  font-weight: 400;
-  display: inline-block;
-  cursor: pointer;
-  text-align: center;
-  box-sizing: border-box;
-  border-radius: 4px;
-  background: rgba(0,187,114,1);
-  color: rgba(255,255,255,1);
+
+// type
+.yx-btn-success {
+  background-color: #00bb72;
+  color: #ffffff;
   &:hover {
     background-color: rgb(0, 160, 98);
   }
 }
-.btn-table {
-  width: 170px;
-  height: 26px;
-  line-height: 26px;
-  display: inline-block;
+.yx-btn-text {
+  color: #00bb72;
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+  &:hover {
+    color: rgba(0, 160, 98, 1);
+  }
+}
+.yx-btn-default {
+  background-color: transparent;
+}
+
+// round
+.yx-btn-round {
   border: 1px solid rgba(238, 238, 238, 1);
+  padding: 5px 16px;
   border-radius: 13px;
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(83,83,83,1);
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  cursor: pointer;
-  position: relative;
 }
+
 // 组件按钮大小
 .btn-mini {
   min-width: 50px;
@@ -235,8 +222,20 @@
     .small-input {
       width: 70px;
     }
-    .text-only {
+    .yx-btn-default {
+      min-width: 34px;
+      height: 34px;
       padding: 0 16px;
+    }
+    .icon-only {
+      padding: 0;
+      .icon {
+        width: 0.85em;
+        height: 0.85em;
+        vertical-align: -0.15em;
+        overflow: hidden;
+        fill: rgb(229, 229, 229);
+      }
     }
   }
 }
@@ -294,8 +293,19 @@
           font-size: 14px;
           color: rgba(83, 83, 83, 1);
           border: 1px solid #ebeef5;
-          .btn-normal-rt {
+          .btn-text-rt {
             margin-right: 10px;
+          }
+          .yx-btn-round {
+            width: 90%;
+          }
+        }
+        &.table-empty {
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          td {
+            color: rgb(144, 147, 153);
           }
         }
       }
@@ -306,7 +316,6 @@
 // tooltip样式
 .tooltip-box {
   width: 320px;
-  height: 189px;
   display: none;
   position: fixed;
   top: 0;
@@ -316,4 +325,127 @@
   border-radius: 4px;
   z-index: 999;
   border-bottom: 1px solid rgba(238,238,238,1);
+  .tooltip-body {
+    padding: 30px 20px 20px;
+    .tip-title {
+      padding-bottom: 10px;
+      color: #535353;
+      font-size: 14px;
+    }
+    .tip-input {
+      input {
+        width: 280px;
+        height: 40px;
+        border: 1px solid rgb(238, 238, 238);
+        &::placeholder {
+          color: rgba(192, 196, 214, 1);
+        }
+      }
+    }
+  }
+  .tooltip-footer {
+    .btn-button-group {
+      height: 64px;
+      display: flex;
+      border-top: 1px solid rgba(238,238,238,1);
+      justify-content: center;
+      align-items: center;
+      .yx-btn {
+        min-width: 100px;
+        &.btn-text-rt {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+// 表格内组件样式
+.tag-select-box {
+  width: 320px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(255,255,255,1);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 4px;
+  z-index: 999;
+  border-bottom: 1px solid rgba(238,238,238,1);
+  .tooltip-body {
+    padding: 30px 20px 20px;
+    .tip-title {
+      padding-bottom: 10px;
+      color: #535353;
+      font-size: 14px;
+    }
+  }
+  .tooltip-footer {
+    .btn-button-group {
+      height: 64px;
+      display: flex;
+      border-top: 1px solid rgba(238,238,238,1);
+      justify-content: center;
+      align-items: center;
+      .yx-btn {
+        min-width: 100px;
+        &.btn-text-rt {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+// 对话框组件
+.yx-dialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  z-index: 999;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.4;
+  }
+  .content {
+    width: 760px;
+    min-height: 250px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,1);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 4px;
+    z-index: 999;
+    opacity: 1;
+    .yx-dialog-header {
+      height: 48px;
+      line-height: 48px;
+      border-bottom: 1px solid rgba(238,238,238,1);
+      padding: 0 20px;
+      font-size: 14px;
+      font-weight: 400;
+      position: relative;
+      .icon-rt {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        color: rgb(137, 139, 152);
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+      }
+    }
+    .yx-dialog-body {
+      padding: 30px;
+    }
+  }
 }

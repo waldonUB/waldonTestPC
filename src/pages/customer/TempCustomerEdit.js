@@ -4,7 +4,7 @@ routerComponents.TempCustomerEdit = {
     <content-header>
       <template #headerLeft>
         <span @click="goBackList">
-          <svg class="icon-only" aria-hidden="true">
+          <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-icon-2"></use>
           </svg>
           <i class="inner-font">客户列表</i>
@@ -135,7 +135,14 @@ routerComponents.TempCustomerEdit = {
                  <span>业务员</span>
                </div>
                <div class="input-group">
-                 <input v-model="editForm.sid" type="text" class="form-input" placeholder="联系人">
+                 <yx-select
+                    top
+                    :selectedLabel="sLabel"
+                    select-width="350px"
+                    select-height="40px"
+                    ref="sSelect">
+                    <li @mousedown="changeSSelect">无</li>
+                 </yx-select>
                </div>
             </div>
             <div class="info-item info-item-last">
@@ -143,7 +150,18 @@ routerComponents.TempCustomerEdit = {
                  <span>客户标签</span>
                </div>
                <div class="input-group">
-                 <input v-model="editForm.labelId" type="text" class="form-input" placeholder="客户来源">
+                 <yx-select
+                    :top="true"
+                    :selectedLabel="tagLabel"
+                    select-width="350px"
+                    select-height="40px"
+                    ref="tagSelect">
+                    <li v-for="item of tagList"
+                      :key="item.code"
+                      @mousedown="changeTagSelect(item)">
+                      {{item.label}}
+                    </li>
+                 </yx-select>
                </div>
             </div>
           </div>
@@ -151,15 +169,15 @@ routerComponents.TempCustomerEdit = {
       </div>
     </section>
     <section class="edit-bottom">
-      <btn-success v-if="!editForm.cid" @click.native="addTsClient" size="large">添加</btn-success>
+      <yx-btn type="success" v-if="!editForm.cid" @click.native="addTsClient" class="edit-btn">添加</yx-btn>
       <div class="btn-group" v-else>
-        <btn-success @click.native="setTsClient" size="large">保存</btn-success>
-        <btn-default class="edit-trash" @click.native="delTsClient" size="large">
+        <yx-btn type="success" @click.native="setTsClient" class="edit-btn">保存</yx-btn>
+        <yx-btn @click.native="delTsClient" class="edit-trash">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-icon-10"></use>
           </svg>
           <span>删除</span>
-        </btn-default>
+        </yx-btn>
       </div>
     </section>
     <yx-alert type="error" :is-show.sync="isShow">{{showMsg}}</yx-alert>
@@ -183,9 +201,12 @@ routerComponents.TempCustomerEdit = {
         salesRelTime: ''
       },
       sourceList: [], // 客户来源列表
+      tagList: [],
       selectedLabel: '',
       isShow: false,
       showMsg: '',
+      sLabel: '', // 业务员
+      tagLabel: '', // 客户标签
     }
   },
   methods: {
@@ -208,6 +229,9 @@ routerComponents.TempCustomerEdit = {
         remark: '',
         salesRelTime: ''
       }
+      this.selectedLabel = '', // 客户来源
+      this.sLabel = '', // 业务员
+      this.tagLabel = '', // 客户标签
       this.$emit('update:isEdit', false)
     },
     /**
@@ -305,15 +329,47 @@ routerComponents.TempCustomerEdit = {
       }
     },
     /**
+     * 获取标签列表
+     */
+    async getTagList () {
+      let params = {
+        sid: -1
+      }
+      const res = await this.$yxPost('/client/tsClientLabel_h.jsp?cmd=getTsClientLabelList', params)
+      if (res.data && res.data.success) {
+        this.tagList = res.data.data.map(item => {
+          return {
+            code: item.id,
+            label: item.name
+          }
+        })
+      }
+    },
+    /**
      * 选择客户来源
      */
     changeSourceSelect (item) {
       this.selectedLabel = item.label
       this.editForm.source = item.code
       this.$refs.sourceSelect.closeOptions()
+    },
+    changeSSelect () {
+      // 账号无业务员id
+      this.sLabel = '无'
+      this.editForm.sid = 0
+      this.$refs.sSelect.closeOptions()
+    },
+    /**
+     * 选择客户标签
+     */
+    changeTagSelect (item) {
+      this.tagLabel = item.label
+      this.editForm.labelId = item.code
+      this.$refs.tagSelect.closeOptions()
     }
   },
   created () {
     this.getTsCleintDef()
+    this.getTagList()
   }
 }

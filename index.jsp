@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>入职测试项目</title>
   <link rel="stylesheet" href="./src/css/res/normalize.css">
-  <link rel="stylesheet" href="./src/css/common/base.css">
+  <link rel="stylesheet/less" type="text/css" href="./src/css/common/base.less">
   <link rel="stylesheet/less" type="text/css" href="./src/css/pages/layout/layout.less">
   <link rel="stylesheet/less" type="text/css" href="./src/css/components/commonTemp.less">
   <link rel="stylesheet/less" type="text/css" href="./src/css/pages/router/customerList.less">
@@ -15,6 +15,7 @@
   <script src="./src/js/vue-router.js"></script>
   <script src="./src/router/index.js"></script>
   <script src="./src/components/common/TempCommon.js"></script>
+  <script src="./src/components/common/TempBase.js"></script>
   <script src="./src/pages/customer/TempCustomerEdit.js"></script>
   <script src="./src/pages/customer/TempCustomerList.js"></script>
   <script src="./src/pages/tagManage/TempTagManage.js"></script>
@@ -46,6 +47,8 @@
 <script src="./src/directives/tooltip/tooltip.js"></script>
 <script>
   (function () {
+
+    Vue.prototype.$bus=new Vue();
 
     // 后端请求配置
     axios.defaults.baseURL = 'http://st.ppp.top/ajax' // 目前只有开发环境，先不配置
