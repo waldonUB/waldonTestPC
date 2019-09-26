@@ -50,7 +50,7 @@ Vue.component('YxBtn', {
       if (this.round) {
         return 'yx-btn-round'
       }
-      
+
     }
   }
 })
@@ -148,25 +148,26 @@ Vue.component('YxSelect', {
   methods: {
     showOptions () {
       this.isShowOptions = !this.isShowOptions
+      const SPACE = 10
       this.$nextTick(() => {
-        // const point = {
-        //   offsetLeft: 0,
-        //   offsetTop: 0
-        // }
-        // const yxSelect = this.$refs.yxSelect
-        // const bodyHeight = document.body.offsetHeight
-        // const optionsHeight = this.$refs.yxSelectOptions.offsetHeight
-        // const yxSelectHeight = yxSelect.offsetHeight
-        // this.getOffset(yxSelect, point)
-        // if ((bodyHeight - point.offsetTop) > optionsHeight) { // 距离底部高度有剩就向下展开，否则向上，待完成
-
-        // } else {
-        //   this.$refs.yxSelectOptions.style.top = (point.offsetTop - yxSelectHeight -10) + 'px'
-        // }
-        if (this.top) { // 后续改成自动选择上下的，递归获取元素距离屏幕左上距离
-          const optionsHeight = this.$refs.yxSelectOptions.offsetHeight
-          this.$refs.yxSelectOptions.style.top = -(optionsHeight + 10) + 'px'
+        const point = {
+          offsetLeft: 0,
+          offsetTop: 0
         }
+        const yxSelect = this.$refs.yxSelect
+        const bodyHeight = document.body.offsetHeight
+        const optionsHeight = this.$refs.yxSelectOptions.offsetHeight
+        const yxSelectHeight = yxSelect.offsetHeight
+        this.getOffset(yxSelect, point)
+        if ((bodyHeight - (point.offsetTop + yxSelectHeight + SPACE)) > optionsHeight) { // 距离底部高度有剩就向下展开
+          this.$refs.yxSelectOptions.style.top = (yxSelectHeight + SPACE) + 'px'
+        } else {
+          this.$refs.yxSelectOptions.style.top = -(optionsHeight + SPACE) + 'px'
+        }
+        // if (this.top) { // 后续改成自动选择上下的，递归获取元素距离屏幕左上距离
+        //   const optionsHeight = this.$refs.yxSelectOptions.offsetHeight
+        //   this.$refs.yxSelectOptions.style.top = -(optionsHeight + 10) + 'px'
+        // }
       })
     },
     closeOptions () {
